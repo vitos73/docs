@@ -1,0 +1,932 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "wmnlz8b6y16ha"
+  },
+  "info": {
+    "title": "Serpstat Public API v4",
+    "version": "v4",
+    "license": {
+      "name": "CC BY 4.0",
+      "url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    "contact": {
+      "name": "Support",
+      "email": "support@serpstat.com",
+      "url": "https://serpstat.com"
+    },
+    "description": "### Current version: 4\n\nhttps://api.serpstat.com/v4 — Endpoint URL, through which all requests should be processed.\n\n### API protocol\n\n- Our API protocol is [**JSON-RPC 2.0**](https://www.jsonrpc.org/specification).\n\n### Requests\n\n- All requests should be sent via **POST** method.\n- All request parameters must be set via POST request body in **JSON** format.\n- Each request should contain a `method` name parameter corresponding to the API method (case-sensitive).\n\n### Authentication\n\n- Tokens are used for authentication. Create a token on [your profile page](https://serpstat.com/users/profile/). \n- `token` is required for all API requests.\n- Api token is available for almost paid and trial plans that have API feature enabled.\n\n### Pagination\n\nFor pagination, use the parameters:\n- `size`: number of results per page (default 100, maximum 1000);\n- `page`: page number (default is 1st page).\n\nPlease note: not all methods are supporting pagination.\n\n\n### Filters\n\nFilters can be applied to each method, most of them are specific for the method you used.\n`filters` object are optional for most methods.\n\n### Responses\n\n- All responses are in **JSON** format.\n- All responses have 200 HTTP status, even erroneous ones. In case of error, the response contains an `error` object instead of `result`.\n\n\n### API credits (limits)\n\nWhen calculating the used credits, your pricing plan's API requests are taken into account, including identical requests and requests for export.\n\n### Request rates\n\nMost subscription plans are limited to 1 request per second.\nTop-tier plans allow up to 10 requests per second.\nFor higher rate limits, contact our sales team.\nExceeding your rate limit will result in an error response.\n\n### Max results\n\nThe maximum number of results returned by each API method is limited up to 60,000 rows.\n"
+  },
+  "servers": [
+    {
+      "url": "https://api.serpstat.com/v4",
+      "description": "Default server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Domain analysis",
+      "description": "Methods to get SEO characteristics for domains"
+    }
+  ],
+  "paths": {
+    "/#SerpstatDomainProcedure.getDomainsInfo": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "method",
+          "in": "query",
+          "required": false,
+          "description": "Should be equeal to `SerpstatDomainProcedure.getDomainsInfo`, requred for request body"
+        }
+      ],
+      "post": {
+        "summary": "SerpstatDomainProcedure.getDomainsInfo",
+        "description": "Method SerpstatDomainProcedure.getDomainsInfo provides the summary SEO information for an array of domains for specified search engine database.",
+        "tags": [
+          "Domain analysis"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "id": "1",
+                      "result": {
+                        "data": [
+                          {
+                            "domain": "nike.com",
+                            "visible": 353.8265,
+                            "keywords": 2787767,
+                            "traff": 161929036,
+                            "visible_dynamic": 10.902100000000019,
+                            "keywords_dynamic": 89982,
+                            "traff_dynamic": 2554976,
+                            "ads_dynamic": 48,
+                            "new_keywords": 246771,
+                            "out_keywords": 156789,
+                            "rised_keywords": 304239,
+                            "down_keywords": 174546,
+                            "ad_keywords": 312,
+                            "ads": 288,
+                            "prev_date": "2024-12-03"
+                          },
+                          {
+                            "domain": "adidas.com",
+                            "visible": 101.9537,
+                            "keywords": 1577112,
+                            "traff": 42296937,
+                            "visible_dynamic": 16.1366,
+                            "keywords_dynamic": 93520,
+                            "traff_dynamic": 3345090,
+                            "ads_dynamic": 3,
+                            "new_keywords": 204673,
+                            "out_keywords": 111153,
+                            "rised_keywords": 181085,
+                            "down_keywords": 94790,
+                            "ad_keywords": 65,
+                            "ads": 64,
+                            "prev_date": "2024-12-03"
+                          }
+                        ],
+                        "summary_info": {
+                          "page": 1,
+                          "left_lines": 9999899
+                        }
+                      }
+                    }
+                  },
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "String with request number, copied from your request"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "description": "Contains separate response for every domain your requested",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "domain": {
+                                "type": "string",
+                                "description": "Domain name"
+                              },
+                              "visible": {
+                                "type": "number",
+                                "description": "Site visibility"
+                              },
+                              "keywords": {
+                                "type": "integer",
+                                "description": "Number of keywords found in the chosen search engine"
+                              },
+                              "traff": {
+                                "type": "integer",
+                                "description": "Estimated search traffic based on keyword positions and search volume"
+                              },
+                              "visible_dynamic": {
+                                "type": "number",
+                                "description": "Change in visibility since the last monitoring"
+                              },
+                              "keywords_dynamic": {
+                                "type": "integer",
+                                "description": "Change in the number of keywords since the last monitoring"
+                              },
+                              "traff_dynamic": {
+                                "type": "integer",
+                                "description": "Traffic change since the last monitoring"
+                              },
+                              "ads_dynamic": {
+                                "type": "integer",
+                                "description": "Dynamics of changes in PPC Ads"
+                              },
+                              "new_keywords": {
+                                "type": "integer",
+                                "description": "Number of new keywords for the domain since the last monitoring found in SERPs"
+                              },
+                              "out_keywords": {
+                                "type": "integer",
+                                "description": "Number of keywords lost by a domain since the last monitoring"
+                              },
+                              "rised_keywords": {
+                                "type": "integer",
+                                "description": "Number of domain keywords for which positions have improved since the last monitoring"
+                              },
+                              "down_keywords": {
+                                "type": "integer",
+                                "description": "Number of domain keywords for which positions have dropped since the last monitoring"
+                              },
+                              "ad_keywords": {
+                                "type": "integer",
+                                "description": "Number of keywords in PPC"
+                              },
+                              "ads": {
+                                "type": "integer",
+                                "description": "Number of PPC Ads"
+                              },
+                              "prev_date": {
+                                "type": "string",
+                                "description": "Previous verification date"
+                              }
+                            }
+                          }
+                        },
+                        "summary_info": {
+                          "type": "object",
+                          "description": "Left limits object",
+                          "properties": {
+                            "page": {
+                              "type": "integer",
+                              "description": "Page number"
+                            },
+                            "left_lines": {
+                              "type": "integer",
+                              "description": "API credits remaining"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-v4-?token=-token-&SerpstatDomainProcedure.getDomainsInfo",
+        "x-stoplight": {
+          "id": "xrvi0qp33fp87"
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "Example 1": {
+                    "id": "1",
+                    "method": "SerpstatDomainProcedure.getDomainsInfo",
+                    "params": {
+                      "domains": [
+                        "nike.com",
+                        "adidas.com"
+                      ],
+                      "se": "g_us"
+                    }
+                  }
+                },
+                "required": [
+                  "id",
+                  "method",
+                  "params"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Provided from your side, will be mirrored to `id` in the response"
+                  },
+                  "method": {
+                    "type": "string",
+                    "description": "must be exact `SerpstatDomainProcedure.getDomainsInfo`\n"
+                  },
+                  "params": {
+                    "type": "object",
+                    "required": [
+                      "domains",
+                      "se"
+                    ],
+                    "properties": {
+                      "domains": {
+                        "type": "array",
+                        "description": "List of domains you want get data for.\n\nIf you would get data for one domain - provide array with one member, eg. `[\"example.com\"]`",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "se": {
+                        "$ref": "#/components/schemas/se"
+                      },
+                      "filters": {
+                        "$ref": "#/components/schemas/basic-filters"
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "id": "1",
+                    "method": "SerpstatDomainProcedure.getDomainsInfo",
+                    "params": {
+                      "domains": [
+                        "nike.com",
+                        "adidas.com"
+                      ],
+                      "se": "g_us"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": []
+      },
+      "servers": [
+        {
+          "url": "https://api.serpstat.com/v4",
+          "description": "Default server"
+        }
+      ]
+    },
+    "/#SerpstatDomainProcedure.getDomainsHistory": {
+      "post": {
+        "summary": "SerpstatDomainProcedure.getDomainsHistory",
+        "tags": [
+          "Domain analysis"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "id": "1",
+                      "result": {
+                        "data": [
+                          {
+                            "domain": "nike.com",
+                            "keywords": 3175733,
+                            "traff": 124030271,
+                            "visible": 321.01933,
+                            "visible_static": 321.01933,
+                            "new_keywords": 402174,
+                            "out_keywords": 181443,
+                            "rised_keywords": 201436,
+                            "down_keywords": 175548,
+                            "ad_keywords": 3902,
+                            "ads": 2968,
+                            "date": "2022-07-30"
+                          },
+                          {
+                            "domain": "nike.com",
+                            "keywords": 2864240,
+                            "traff": 120305851,
+                            "visible": 318.67893,
+                            "visible_static": 318.67893,
+                            "new_keywords": 17958,
+                            "out_keywords": 10231,
+                            "rised_keywords": 22929,
+                            "down_keywords": 15477,
+                            "ad_keywords": 1046,
+                            "ads": 934,
+                            "date": "2022-06-03"
+                          },
+                          {
+                            "domain": "nike.com",
+                            "keywords": 2856513,
+                            "traff": 117422687,
+                            "visible": 318.90148,
+                            "visible_static": 318.90148,
+                            "new_keywords": 32115,
+                            "out_keywords": 25209,
+                            "rised_keywords": 36776,
+                            "down_keywords": 39943,
+                            "ad_keywords": 921,
+                            "ads": 823,
+                            "date": "2022-05-20"
+                          },
+                          {
+                            "domain": "nike.com",
+                            "keywords": 3181128,
+                            "traff": 128046844,
+                            "visible": 316.96538,
+                            "visible_static": 316.96538,
+                            "new_keywords": 27433,
+                            "out_keywords": 11143,
+                            "rised_keywords": 24665,
+                            "down_keywords": 23018,
+                            "ad_keywords": 3327,
+                            "ads": 2964,
+                            "date": "2022-01-18"
+                          },
+                          {
+                            "domain": "nike.com",
+                            "keywords": 727939,
+                            "traff": 15070081,
+                            "visible": 422.66821,
+                            "visible_static": 422.66821,
+                            "new_keywords": 1853,
+                            "out_keywords": 1166,
+                            "rised_keywords": 2071,
+                            "down_keywords": 812,
+                            "ad_keywords": 11594,
+                            "ads": 3815,
+                            "date": "2017-03-22"
+                          }
+                        ],
+                        "summary_info": {
+                          "page": 1,
+                          "total": 5,
+                          "left_lines": 935732
+                        }
+                      }
+                    }
+                  },
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "description": "Contains 2-4 week data points for given domain",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "domain": {
+                                "type": "string",
+                                "description": "Domain name"
+                              },
+                              "keywords": {
+                                "type": "integer",
+                                "description": "Number of keywords seen in SEPSs for given search engine"
+                              },
+                              "traff": {
+                                "type": "integer",
+                                "description": "Estimated search traffic based on keyword positions and search volume"
+                              },
+                              "visible": {
+                                "type": "number",
+                                "description": "Site visibility"
+                              },
+                              "visible_static": {
+                                "type": "number",
+                                "description": "Change in visibility since the last monitoring"
+                              },
+                              "new_keywords": {
+                                "type": "integer",
+                                "description": "Number of new keywords since the last 2-4 weeks"
+                              },
+                              "out_keywords": {
+                                "type": "integer",
+                                "description": "Number of lost keywords since the last N-days monitoring"
+                              },
+                              "rised_keywords": {
+                                "type": "integer",
+                                "description": "Number of keywords which positions of the domain have improved over the last N-days"
+                              },
+                              "down_keywords": {
+                                "type": "integer",
+                                "description": "Number of keywords which positions of the domain have dropped over the last N-days"
+                              },
+                              "ad_keywords": {
+                                "type": "integer",
+                                "description": "Number of keywords in PPC"
+                              },
+                              "ads": {
+                                "type": "integer",
+                                "description": "Number of ads in PPC"
+                              },
+                              "date": {
+                                "type": "string",
+                                "description": "Date when the metrics were recorded"
+                              }
+                            }
+                          }
+                        },
+                        "summary_info": {
+                          "type": "object",
+                          "description": "Credits and info object",
+                          "properties": {
+                            "page": {
+                              "type": "integer",
+                              "description": "page number"
+                            },
+                            "total": {
+                              "type": "integer",
+                              "description": "Number of results for request"
+                            },
+                            "left_lines": {
+                              "type": "integer",
+                              "description": "API credits remaining after this request"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "id": "1",
+                      "result": {
+                        "data": [
+                          {
+                            "domain": "www.nike.com",
+                            "keywords": 2634942,
+                            "traff": 159527047,
+                            "visible": 355.95283,
+                            "visible_static": 355.95283,
+                            "new_keywords": 282735,
+                            "out_keywords": 176618,
+                            "rised_keywords": 330141,
+                            "down_keywords": 171657,
+                            "ad_keywords": 321,
+                            "ads": 296,
+                            "date": "2024-12-22"
+                          },
+                          {
+                            "domain": "nike.com",
+                            "keywords": 2787767,
+                            "traff": 161929036,
+                            "visible": 353.82646,
+                            "visible_static": 353.82646,
+                            "new_keywords": 246771,
+                            "out_keywords": 156789,
+                            "rised_keywords": 304239,
+                            "down_keywords": 174546,
+                            "ad_keywords": 312,
+                            "ads": 288,
+                            "date": "2024-12-18"
+                          },
+                          {
+                            "domain": "www.nike.com",
+                            "keywords": 2528825,
+                            "traff": 155776151,
+                            "visible": 339.81401,
+                            "visible_static": 339.81401,
+                            "new_keywords": 136310,
+                            "out_keywords": 104823,
+                            "rised_keywords": 147136,
+                            "down_keywords": 112890,
+                            "ad_keywords": 264,
+                            "ads": 252,
+                            "date": "2024-12-07"
+                          },
+                          {
+                            "domain": "nike.com",
+                            "keywords": 2697785,
+                            "traff": 159374060,
+                            "visible": 342.92439,
+                            "visible_static": 342.92439,
+                            "new_keywords": 144019,
+                            "out_keywords": 111065,
+                            "rised_keywords": 127108,
+                            "down_keywords": 105402,
+                            "ad_keywords": 264,
+                            "ads": 251,
+                            "date": "2024-12-03"
+                          },
+                          {
+                            "domain": "www.nike.com",
+                            "keywords": 2497338,
+                            "traff": 150667511,
+                            "visible": 328.24322,
+                            "visible_static": 328.24322,
+                            "new_keywords": 941076,
+                            "out_keywords": 1416211,
+                            "rised_keywords": 163814,
+                            "down_keywords": 152685,
+                            "ad_keywords": 238,
+                            "ads": 226,
+                            "date": "2024-11-22"
+                          }
+                        ],
+                        "summary_info": {
+                          "page": 1,
+                          "total": 48,
+                          "left_lines": 9999669
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-v4-?token=-token-&SerpstatDomainProcedure.getDomainsHistory",
+        "x-stoplight": {
+          "id": "wdm9fcx2pwr60"
+        },
+        "description": "Method **SerpstatDomainProcedure.getDomainsHistory** provides you with the historical data on a domain’s number of keywords and visibility. \n\n**Credits charged**: 1 credit per member of `data` object array.\n\nIf no data found you will receive error and won't be charged:\n```\n{\n  \"id\": \"1\",\n  \"error\": {\n    \"code\": 32017,\n    \"message\": \"Data not found\",\n    \"data\": null\n  }\n}\n```",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "Example 1": {
+                    "id": "1",
+                    "method": "SerpstatDomainProcedure.getDomainsHistory",
+                    "params": {
+                      "domain": "nike.com",
+                      "se": "g_us",
+                      "sort": {
+                        "date": "desc"
+                      },
+                      "size": 20,
+                      "filters": {
+                        "visible_from": 315
+                      },
+                      "during_all_time": true
+                    }
+                  }
+                },
+                "required": [
+                  "id",
+                  "method",
+                  "params"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Provided from your side, will be mirrored to `id` in the response"
+                  },
+                  "method": {
+                    "type": "string",
+                    "description": "must be exact `SerpstatDomainProcedure.getDomainsHistory`\n"
+                  },
+                  "params": {
+                    "type": "object",
+                    "required": [
+                      "se",
+                      "domain"
+                    ],
+                    "properties": {
+                      "se": {
+                        "$ref": "#/components/schemas/se"
+                      },
+                      "domain": {
+                        "type": "string",
+                        "description": "domain name, example `\"gogler.com\"`"
+                      },
+                      "sort": {
+                        "$ref": "#/components/schemas/sort"
+                      },
+                      "size": {
+                        "type": "integer",
+                        "description": "Number of results per page in response",
+                        "default": 100,
+                        "minimum": 1,
+                        "maximum": 1000
+                      },
+                      "filters": {
+                        "$ref": "#/components/schemas/basic-filters"
+                      },
+                      "during_all_time": {
+                        "type": "boolean",
+                        "description": "History period: if `true` -  get information on All time,\n`false` - get information on year to date"
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "id": "1",
+                    "method": "SerpstatDomainProcedure.getDomainsHistory",
+                    "params": {
+                      "domain": "nike.com",
+                      "se": "g_us",
+                      "sort": {
+                        "date": "desc"
+                      },
+                      "size": 5,
+                      "during_all_time": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/#SerpstatDomainProcedure.getDomainKeywords": {
+      "post": {
+        "summary": "SerpstatDomainProcedure.getDomainKeywords",
+        "tags": [
+          "Domain analysis"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-#SerpstatDomainProcedure.getDomainKeywords",
+        "x-stoplight": {
+          "id": "var4clfc688je"
+        },
+        "description": "The `SerpstatDomainProcedure.getDomainKeywords` method return keywords which the analyzed domain ranks for in Google top-100 search results. The data set is similar to the Domain analysis — SEO research — Keywords report. \nYou can get up to 60 000 results in this report.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "method": {
+                    "type": "string"
+                  },
+                  "params": {
+                    "type": "object",
+                    "properties": {
+                      "domain": {
+                        "type": "string"
+                      },
+                      "se": {
+                        "type": "string"
+                      },
+                      "withSubdomains": {
+                        "type": "boolean"
+                      },
+                      "withIntents": {
+                        "type": "boolean"
+                      },
+                      "sort": {
+                        "type": "object",
+                        "properties": {
+                          "position": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "keywords": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "minusKeywords": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "page": {
+                        "type": "string"
+                      },
+                      "size": {
+                        "type": "string"
+                      },
+                      "filters": {
+                        "type": "object",
+                        "properties": {
+                          "right_spelling": {
+                            "type": "boolean"
+                          },
+                          "intents_contain": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "intents_not_contain": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "x-examples": {
+                  "Example 1": {
+                    "id": "1",
+                    "method": "SerpstatDomainProcedure.getDomainKeywords",
+                    "params": {
+                      "domain": "nike.com",
+                      "se": "g_us",
+                      "withSubdomains": true,
+                      "withIntents": true,
+                      "sort": {
+                        "position": "asc"
+                      },
+                      "url": "https://www.nike.com/soccer",
+                      "keywords": [
+                        "shop",
+                        "nike"
+                      ],
+                      "minusKeywords": [
+                        "nikes",
+                        "nke"
+                      ],
+                      "page": "1",
+                      "size": "10",
+                      "filters": {
+                        "right_spelling": false,
+                        "intents_contain": [
+                          "commercial"
+                        ],
+                        "intents_not_contain": [
+                          "navigational"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "id": "1",
+                    "method": "SerpstatDomainProcedure.getDomainKeywords",
+                    "params": {
+                      "domain": "nike.com",
+                      "se": "g_us",
+                      "withSubdomains": true,
+                      "withIntents": true,
+                      "sort": {
+                        "position": "asc"
+                      },
+                      "url": "https://www.nike.com/soccer",
+                      "keywords": [
+                        "shop",
+                        "nike"
+                      ],
+                      "minusKeywords": [
+                        "nikes",
+                        "nke"
+                      ],
+                      "page": "1",
+                      "size": "10",
+                      "filters": {
+                        "right_spelling": false,
+                        "intents_contain": [
+                          "commercial"
+                        ],
+                        "intents_not_contain": [
+                          "navigational"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "basic-filters": {
+        "title": "basic filters",
+        "x-stoplight": {
+          "id": "qi7msvblisinb"
+        },
+        "type": "object",
+        "description": "Optional combinations of filters applied to your request. In most cases one filter is enough. Filter combinations have `AND` logic. ",
+        "properties": {
+          "traff": {
+            "type": "integer",
+            "description": "filter results match exact given traffic value "
+          },
+          "traff_from": {
+            "type": "integer",
+            "description": "filters results that exceed given traffic value"
+          },
+          "traff_to": {
+            "type": "integer",
+            "description": "filter results that bellow given traffic value"
+          },
+          "visible": {
+            "type": "integer",
+            "description": "exact visibility value match"
+          },
+          "visible_from": {
+            "type": "integer",
+            "description": "filter results that exceed given visibility value"
+          },
+          "visible_to": {
+            "type": "integer",
+            "description": "filter results that bellow given visibility value"
+          }
+        }
+      },
+      "se": {
+        "title": "search engines abbreviations",
+        "x-stoplight": {
+          "id": "65l6l8igp17z4"
+        },
+        "type": "string",
+        "x-internal": false,
+        "description": "Example `\"se\":\"g_us\"` \nShould be lowercase and have value one of following:\n\nse | Search Engine | Country \n---------|----------|----------\ng_af | Google | Afghanistan\ng_al | Google | Albania\ng_dz | Google | Algeria\ng_as | Google | American Samoa\ng_ad | Google | Andorra\ng_ao | Google | Angola\ng_ai | Google | Anguilla\ng_ag | Google | Antigua and Barbuda\ng_ar | Google | Argentina\ng_am | Google | Armenia\ng_aw | Google | Aruba\ng_au | Google | Australia\ng_at | Google | Austria\ng_az | Google | Azerbaijan\ng_bh | Google | Bahrain\ng_bd | Google | Bangladesh\ng_bb | Google | Barbados\ng_by | Google | Belarus\ng_be | Google | Belgium\ng_bz | Google | Belize\ng_bj | Google | Benin\ng_bm | Google | Bermuda\ng_bt | Google | Bhutan\ng_bo | Google | Bolivia\ng_ba | Google | Bosnia and Herzegovina\ng_bw | Google | Botswana\ng_br | Google | Brazil\ng_io | Google | British Indian Ocean Territory\ng_vg | Google | British Virgin Islands\ng_bn | Google | Brunei\ng_bg | Google | Bulgaria\ng_bf | Google | Burkina Faso\ng_bi | Google | Burundi\ng_kh | Google | Cambodia\ng_cm | Google | Cameroon\ng_ca | Google | Canada\ng_cv | Google | Cape Verde\ng_ky | Google | Cayman Islands\ng_cf | Google | Central African Republic\ng_td | Google | Chad\ng_cl | Google | Chile\ng_cn | Google | China\ng_cx | Google | Christmas Island\ng_сс | Google | Cocos (Keeling) Islands\ng_co | Google | Colombia\ng_km | Google | Comoros\ng_ck | Google | Cook Islands\ng_cr | Google | Costa Rica\ng_ci | Google | Cote d'Ivoire\ng_hr | Google | Croatia\ng_cw | Google | Curacao\ng_cy | Google | Cyprus\ng_cz | Google | Czech Republic\ng_cd | Google | Democratic Republic of the Congo\ng_dk | Google | Denmark\ng_dj | Google | Djibouti\ng_dm | Google | Dominica\ng_do | Google | Dominican Republic\ng_ec | Google | Ecuador\ng_eg | Google | Egypt\ng_sv | Google | El Salvador\ng_gq | Google | Equatorial Guinea\ng_er | Google | Eritrea\ng_ee | Google | Estonia\ng_et | Google | Ethiopia\ng_fk | Google | Falkland Islands (Islas Malvinas)\ng_fo | Google | Faroe Islands\ng_fm | Google | Federated States of Micronesia\ng_fj | Google | Fiji\ng_fi | Google | Finland\ng_fr | Google | France\ng_gf | Google | French Guiana\ng_pf | Google | French Polynesia\ng_ga | Google | Gabon\ng_ge | Google | Georgia\ng_de | Google | Germany\ng_gh | Google | Ghana\ng_gi | Google | Gibraltar\ng_gr | Google | Greece\ng_gl | Google | Greenland\ng_gd | Google | Grenada\ng_gp | Google | Guadeloupe\ng_gu | Google | Guam\ng_gt | Google | Guatemala\ng_gg | Google | Guernsey\ng_gn | Google | Guinea\ng_gw | Google | Guinea-Bissau\ng_gy | Google | Guyana\ng_ht | Google | Haiti\ng_hn | Google | Honduras\ng_hk | Google | Hong Kong\ng_hu | Google | Hungary\ng_is | Google | Iceland\ng_in | Google | India\ng_id | Google | Indonesia\ng_iq | Google | Iraq\ng_ie | Google | Ireland\ng_im | Google | Isle of Man\ng_il | Google | Israel\ng_it | Google | Italy\ng_jm | Google | Jamaica\ng_jp | Google | Japan\ng_je | Google | Jersey\ng_jo | Google | Jordan\ng_kz | Google | Kazakhstan\ng_ke | Google | Kenya\ng_ki | Google | Kiribati\ng_kw | Google | Kuwait\ng_kg | Google | Kyrgyzstan\ng_la | Google | Laos\ng_lv | Google | Latvia\ng_lb | Google | Lebanon\ng_ls | Google | Lesotho\ng_lr | Google | Liberia\ng_ly | Google | Libya\ng_li | Google | Liechtenstein\ng_lt | Google | Lithuania\ng_lu | Google | Luxembourg\ng_mo | Google | Macau\ng_mk | Google | Macedonia (FYROM)\ng_mg | Google | Madagascar\ng_mw | Google | Malawi\ng_my | Google | Malaysia\ng_mv | Google | Maldives\ng_ml | Google | Mali\ng_mt | Google | Malta\ng_mh | Google | Marshall Islands\ng_mq | Google | Martinique\ng_mr | Google | Mauritania\ng_mu | Google | Mauritius\ng_yt | Google | Mayotte\ng_mx | Google | Mexico\ng_md | Google | Moldova\ng_mc | Google | Monaco\ng_mn | Google | Mongolia\ng_me | Google | Montenegro\ng_ms | Google | Montserrat\ng_ma | Google | Morocco\ng_mz | Google | Mozambique\ng_mm | Google | Myanmar (Burma)\ng_na | Google | Namibia\ng_nr | Google | Nauru\ng_np | Google | Nepal\ng_nl | Google | Netherlands\ng_nc | Google | New Caledonia\ng_nz | Google | New Zealand\ng_ni | Google | Nicaragua\ng_ne | Google | Niger\ng_ng | Google | Nigeria\ng_nu | Google | Niue\ng_nf | Google | Norfolk Island\ng_mp | Google | Northern Mariana Islands\ng_no | Google | Norway\ng_om | Google | Oman\ng_pk | Google | Pakistan\ng_pw | Google | Palau\ng_ps | Google | Palestine\ng_pa | Google | Panama\ng_pg | Google | Papua New Guinea\ng_py | Google | Paraguay\ng_pe | Google | Peru\ng_ph | Google | Philippines\ng_pn | Google | Pitcairn Islands\ng_pl | Google | Poland\ng_pt | Google | Portugal\ng_pr | Google | Puerto Rico\ng_qa | Google | Qatar\ng_cg | Google | Republic of the Congo\ng_re | Google | Reunion\ng_ro | Google | Romania\ng_ru | Google | Russia\ng_rw | Google | Rwanda\ng_sh | Google | Saint Helena, Ascension and Tristan da Cunha\ng_kn | Google | Saint Kitts and Nevis\ng_lc | Google | Saint Lucia\ng_pm | Google | Saint Pierre and Miquelon\ng_vc | Google | Saint Vincent and Grenadines\ng_ws | Google | Samoa\ng_sm | Google | San Marino\ng_st | Google | Sao Tome and Principe\ng_sa | Google | Saudi Arabia\ng_sn | Google | Senegal\ng_rs | Google | Serbia\ng_sc | Google | Seychelles\ng_sl | Google | Sierra Leone\ng_sg | Google | Singapore\ng_sx | Google | Sint Maarten\ng_sk | Google | Slovakia\ng_si | Google | Slovenia\ng_sb | Google | Solomon Islands\ng_so | Google | Somalia\ng_za | Google | South Africa\ng_kr | Google | South Korea\ng_es | Google | Spain\ng_lk | Google | Sri Lanka\ng_sr | Google | Suriname\ng_sz | Google | Swaziland\ng_se | Google | Sweden\ng_ch | Google | Switzerland\ng_tw | Google | Taiwan\ng_tj | Google | Tajikistan\ng_tz | Google | Tanzania\ng_th | Google | Thailand\ng_bs | Google | The Bahamas\ng_gm | Google | The Gambia\ng_tl | Google | Timor-Leste\ng_tg | Google | Togo\ng_tk | Google | Tokelau\ng_to | Google | Tonga\ng_tt | Google | Trinidad and Tobago\ng_tn | Google | Tunisia\ng_tr | Google | Turkey\ng_tm | Google | Turkmenistan\ng_tc | Google | Turks and Caicos Islands\ng_tv | Google | Tuvalu\ng_vi | Google | U.S. Virgin Islands\ng_ug | Google | Uganda\ng_ua | Google | Ukraine\ng_ae | Google | United Arab Emirates\ng_uk | Google | United Kingdom\ng_us | Google | United States\ng_uy | Google | Uruguay\ng_uz | Google | Uzbekistan\ng_vu | Google | Vanuatu\ng_va | Google | Vatican City\ng_ve | Google | Venezuela\ng_vn | Google | Vietnam\ng_wf | Google | Wallis and Futuna\ng_ye | Google | Yemen\ng_zm | Google | Zambia\ng_zw | Google | Zimbabwe\n---------|----------|----------\nbing_us | Bing | United States\n"
+      },
+      "sort": {
+        "title": "sort",
+        "x-stoplight": {
+          "id": "r0ulmhmtrwv78"
+        },
+        "type": "object",
+        "description": "Optional sort object whitch allow to get results ordered by one of result fields in given order. Only one field can be used for sorting simulatenously. ",
+        "properties": {
+          "date": {
+            "x-stoplight": {
+              "id": "p1bf3s78lghso"
+            },
+            "enum": [
+              "asc",
+              "desc"
+            ]
+          },
+          "keywords": {
+            "x-stoplight": {
+              "id": "07tub8vkbrq3m"
+            },
+            "enum": [
+              "asc",
+              "desc"
+            ]
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "token": {
+        "name": "token",
+        "type": "apiKey",
+        "in": "query"
+      }
+    }
+  },
+  "security": [
+    {
+      "token": []
+    }
+  ]
+}
